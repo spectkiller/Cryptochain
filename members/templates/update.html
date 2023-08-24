@@ -1,0 +1,15 @@
+<!DOCTYPE>
+<html>
+    <body>
+        <form action="updaterecord/{{member.id}}" method="post">
+            {% csrf_token %}
+            Crypto Token:<br>
+            <input name="first" value="{{member.Cryptocurrency}}">
+            <br><br>
+            Quantity:<br>
+            <input name="last" value="{{member.Amount}}">
+            <br><br>
+            <input type="submit" value="Update">
+        </form>
+    </body>
+</html>
