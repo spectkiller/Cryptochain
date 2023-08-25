@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-y(j!1fyu5#b+0kr@2ei-89vd_tk-jt)64wtj-6g=i^^1+6v4-k
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cryptochain.azurewebsites.net']
 
 # Application definition
 
