@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'Cryptochain'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2CE5D77901B4ABBA19CB75A8F7BF7BA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F85F011949D4685A9CAA1AD0F8077E5 }}
