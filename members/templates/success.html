@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        SUCESSSS
-    </body>
+<head>
+  <title>Success</title>
+  <script>
+    // Delay the redirection after 5 seconds
+    setTimeout(function() {
+      window.location.href = '{% url 'members:send_email' %}';
+    }, 4000); // 5000 milliseconds = 5 seconds
+  </script>
+</head>
+<body>
+  <h1>Success!</h1>
+  <p>Your email has been sent successfully.</p>
+</body>
 </html>
