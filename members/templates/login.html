@@ -1,4 +1,4 @@
-<!-- login.html -->
+<!-- login.html
 <!DOCTYPE html>
 <html>
   <body>
@@ -8,4 +8,30 @@
   <button type="submit">Log in</button>
 </form>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log in</button>
+</form>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+function validateForm() {
+    var response = grecaptcha.getResponse();
+    if (response.length == 0) {
+        alert("Please complete the reCAPTCHA");
+        return false;
+    }
+}
+</script>
+
+</body>
 </html>
+

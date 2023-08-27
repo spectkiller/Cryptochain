@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'members.apps.MembersConfig',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -143,4 +144,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "rajhrishabh892@gmail.com"
 EMAIL_HOST_PASSWORD = "cvsvckpxnebpxnau"
 
-lol = 1
+RECAPTCHA_PUBLIC_KEY = '6LevSt0nAAAAAF9J4joi_bzsV8On3zt7tldkkXvZ'
+RECAPTCHA_PRIVATE_KEY = '6LevSt0nAAAAAF9J4joi_bzsV8On3zt7tldkkXvZ'
