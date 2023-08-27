@@ -63,16 +63,20 @@ def updaterecord(request, id):
     member.save()
     return HttpResponseRedirect(reverse('index'))
 
-
 def send_email(request):
     if request.method == 'POST':
+        first_name = request.POST.get('fname')
+        last_name = request.POST.get('lname')
+        feedback_choice = request.POST.get('feedback')
         message = request.POST.get('message')
         sender_email = request.POST.get('email')
         subject = "Feedback"
         recipient_email = 'rajhrishabh892@gmail.com'
-        send_mail(subject, message, sender_email, [recipient_email])
+        full_message = f"First Name: {first_name}\nLast Name: {last_name}\nFeedback Choice: {feedback_choice}\nMessage: {message}"
+        send_mail(subject, full_message, sender_email, [recipient_email])
         return render(request, 'success.html')
     return render(request,'pjkt3.html')
+
 
 def pjkt4(request):
     return render(request,'pjkt4.html')
@@ -83,15 +87,21 @@ def pjkt1(request):
 def pjkt2(request):
     return render(request,'pjkt2.html')
 
+
 def send_email1(request):
     if request.method == 'POST':
+        first_name = request.POST.get('fname')
+        last_name = request.POST.get('lname')
+        feedback_choice = request.POST.get('feedback')
         message = request.POST.get('message')
         sender_email = request.POST.get('email')
         subject = "Feedback"
         recipient_email = 'rajhrishabh892@gmail.com'
-        send_mail(subject, message, sender_email, [recipient_email])
+        full_message = f"First Name: {first_name}\nLast Name: {last_name}\nFeedback Choice: {feedback_choice}\nMessage: {message}"
+        send_mail(subject, full_message, sender_email, [recipient_email])
         return render(request, 'success.html')
     return render(request,'pjkt3-dark.html')
+
 
 def pjkt4_dark(request):
     return render(request,'pjkt4-dark.html')
