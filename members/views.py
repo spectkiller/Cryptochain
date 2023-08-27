@@ -6,7 +6,9 @@ from django.template import loader
 from .models import Members
 from django.urls import reverse
 from django.core.mail import send_mail
-
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import get_user_model
+from .forms import SignUpForm, LoginForm
 
 # Create your views here.
 
@@ -148,5 +150,45 @@ def pjkt1_dark(request):
 def pjkt2_dark(request):
     return render(request,'pjkt2-dark.html')
 
+
+
+
+# other imports and code...
+
+User = get_user_model()
+
+# other imports and code...
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
 def login(request):
-    return render(request,'login.html')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username_or_email = form.cleaned_data.get('login')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(request, username=username_or_email, password=password)
+            if user is None:
+                try:
+                    user = User.objects.get(email=username_or_email)
+                    user = authenticate(request, username=user.username, password=password)
+                except User.DoesNotExist:
+                    pass
+
+            if user is not None:
+                auth_login(request, user)
+                return redirect('pjkt1')
+            else:
+                form.add_error(None, "Invalid username/email or password")
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})

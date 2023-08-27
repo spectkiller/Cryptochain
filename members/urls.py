@@ -24,5 +24,6 @@ urlpatterns = [
   path('pjkt4_dark/', views.pjkt4_dark, name='pjkt4_dark'),
   path('pjkt1_dark/', views.pjkt1_dark, name='pjkt1_dark'),
   path('pjkt2_dark/', views.pjkt2_dark, name='pjkt2_dark'),
-  path('login/', views.login, name='login'),
+  path('signup/', views.signup, name='signup'),
+  path('', views.login, name='login'),
 ]

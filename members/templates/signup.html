@@ -1,0 +1,25 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<form method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+</form>
+
+<script>
+function validateForm() {
+    var x = document.forms[0]["username"].value;
+    if (x == "") {
+        alert("Username must be filled out");
+        return false;
+    }
+    
+}
+</script>
+
+</body>
+</html>
