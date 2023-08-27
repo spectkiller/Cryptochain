@@ -24,10 +24,26 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
+def index_dark(request):
+    member = Members.objects.all().values()
+
+    template = loader.get_template("index-dark.html")
+
+    context = {
+
+        "member": member
+
+    }
+    return HttpResponse(template.render(context, request))
+
 
 
 def add(request):
     template = loader.get_template("add.html")
+    return HttpResponse(template.render({}, request))
+
+def add_dark(request):
+    template = loader.get_template("add-dark.html")
     return HttpResponse(template.render({}, request))
 
 
@@ -38,11 +54,23 @@ def addrecord(request):
     member.save()
     return HttpResponseRedirect(reverse("index"))
 
+def addrecord1(request):
+    x = request.POST ["first"]
+    y = request.POST ["last"]
+    member = Members(Cryptocurrency=x, Amount=y)
+    member.save()
+    return HttpResponseRedirect(reverse("index_dark"))
+
 
 def delete(request, id):
     member = Members.objects.get(id=id)
     member.delete()
     return HttpResponseRedirect(reverse('index'))
+
+def delete1(request, id):
+    member = Members.objects.get(id=id)
+    member.delete()
+    return HttpResponseRedirect(reverse('index_dark'))
 
     
 def update(request, id):
@@ -63,6 +91,14 @@ def updaterecord(request, id):
     member.save()
     return HttpResponseRedirect(reverse('index'))
 
+def updaterecord1(request, id):
+    first=request.POST['first']
+    last=request.POST['last']
+    member=Members.objects.get(id=id)
+    member.Cryptocurrency=first
+    member.Amount=last
+    member.save()
+    return HttpResponseRedirect(reverse('index_dark'))
 def send_email(request):
     if request.method == 'POST':
         first_name = request.POST.get('fname')
