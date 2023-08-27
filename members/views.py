@@ -36,13 +36,13 @@ def addrecord(request):
     y = request.POST ["last"]
     member = Members(Cryptocurrency=x, Amount=y)
     member.save()
-    return HttpResponseRedirect(reverse("members:index"))
+    return HttpResponseRedirect(reverse("index"))
 
 
 def delete(request, id):
     member = Members.objects.get(id=id)
     member.delete()
-    return HttpResponseRedirect(reverse('members:index'))
+    return HttpResponseRedirect(reverse('index'))
 
     
 def update(request, id):
@@ -61,7 +61,7 @@ def updaterecord(request, id):
     member.Cryptocurrency=first
     member.Amount=last
     member.save()
-    return HttpResponseRedirect(reverse('members:index'))
+    return HttpResponseRedirect(reverse('index'))
 
 
 def send_email(request):
