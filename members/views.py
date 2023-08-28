@@ -193,18 +193,12 @@ User = get_user_model()
 #     else:
 #         form = LoginForm()
 #     return render(request, 'login.html', {'form': form})
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            captcha_response = request.POST.get('g-recaptcha-response')
-            captcha = ReCaptchaField()
-            if not captcha.submit(captcha_response):
-                form.add_error('captcha', 'Invalid reCAPTCHA response.')
-            else:
-                form.save()
-                return redirect('login')
+            form.save()
+            return redirect('login')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -213,27 +207,21 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            captcha_response = request.POST.get('g-recaptcha-response')
-            captcha = ReCaptchaField()
-            if not captcha.submit(captcha_response):
-                form.add_error('captcha', 'Invalid reCAPTCHA response.')
-            else:
-                username_or_email = form.cleaned_data.get('login')
-                password = form.cleaned_data.get('password')
+            username_or_email = form.cleaned_data.get('login')
+            password = form.cleaned_data.get('password')
 
-                user = authenticate(request, username=username_or_email, password=password)
-                if user is None:
-                    try:
-                        user = User.objects.get(email=username_or_email)
-                        user = authenticate(request, username=user.username, password=password)
-                    except User.DoesNotExist:
-                        pass
-
+            user = authenticate(request, username=username_or_email, password=password)
+            if user is None:
+                user = User.objects.filter(email=username_or_email).first()  # Change this line
                 if user is not None:
-                    auth_login(request, user)
-                    return redirect('pjkt1')
-                else:
-                    form.add_error(None, "Invalid username/email or password")
+                    user = authenticate(request, username=user.username, password=password)
+
+            if user is not None:
+                auth_login(request, user)
+                return redirect('pjkt1')
+            else:
+                form.add_error(None, "Invalid username/email or password")
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+

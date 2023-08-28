@@ -1,5 +1,5 @@
 <!-- signup.html -->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <body>
 
@@ -22,4 +22,52 @@ function validateForm() {
 </script>
 
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" id="signupForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+</form>
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdLet0nAAAAAH4rbuztELRicoe-IcasYSR7AWgu"></script>
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+    var username = document.forms[0]["username"].value;
+    if (username == "") {
+        alert("Username must be filled out");
+        e.preventDefault();
+        return false;
+    }
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdLet0nAAAAAH4rbuztELRicoe-IcasYSR7AWgu', {action: 'signup'}).then(function(token) {
+            if (token) {
+                var form = document.getElementById('signupForm');
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'g-recaptcha-response';
+                input.value = token;
+                form.appendChild(input);
+                form.submit();
+            } else {
+                alert("Please complete the reCAPTCHA");
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+});
+</script>
+
+<!-- Add this to your HTML to show the reCAPTCHA badge -->
+<div class="g-recaptcha" data-sitekey="6LdLet0nAAAAAH4rbuztELRicoe-IcasYSR7AWgu" data-size="invisible"></div>
+
+</body>
 </html>
+

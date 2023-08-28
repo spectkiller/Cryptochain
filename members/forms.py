@@ -27,9 +27,10 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'title': 'Your password must contain at least 8 characters.'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'title': 'Enter the same password as before, for verification.'}))
     captcha = ReCaptchaField(
+        label='',  # Add this line
         widget=ReCaptchaV3(
             attrs={
-                'required_score': 0.5,  # adjust as needed
+                'required_score': 0.5,
                 'widget_options': {'size': 'invisible'},
             }
         )
@@ -44,9 +45,10 @@ class LoginForm(forms.Form):
     login = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username or Email'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     captcha = ReCaptchaField(
+        label='',  # Add this line
         widget=ReCaptchaV3(
             attrs={
-                'required_score': 0.5,  # adjust as needed
+                'required_score': 0.5,
                 'widget_options': {'size': 'invisible'},
             }
         )
