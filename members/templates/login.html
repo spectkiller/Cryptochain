@@ -18,12 +18,19 @@
 <form method="post" onsubmit="return validateForm()">
     {% csrf_token %}
     {{ form.as_p }}
+    <div class="g-recaptcha" data-sitekey="6LevSt0nAAAAAF9J4joi_bzsV8On3zt7tldkkXvZ"></div>
     <button type="submit">Log in</button>
 </form>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
 function validateForm() {
+    var x = document.forms[0]["username"].value;
+    if (x == "") {
+        alert("Username must be filled out");
+        return false;
+    }
+    
     var response = grecaptcha.getResponse();
     if (response.length == 0) {
         alert("Please complete the reCAPTCHA");
