@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+from my_secrets.definitions import EMAIL_BACKEND, EMAIL_HOST, EMAIL_USE_TLS, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+from my_secrets.definitions import RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'members.apps.MembersConfig',
     'whitenoise.runserver_nostatic',
-    'captcha'
+    'captcha',
+    'django_secrets'
 ]
 
 MIDDLEWARE = [
@@ -137,12 +139,14 @@ CSRF_TRUSTED_ORIGINS = ['https://cryptochain.azurewebsites.net']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND ="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "rajhrishabh892@gmail.com"
-EMAIL_HOST_PASSWORD = "cvsvckpxnebpxnau"
+# Email settings
+EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = EMAIL_HOST
+EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_PORT = EMAIL_PORT
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 
-RECAPTCHA_PUBLIC_KEY = '6LdLet0nAAAAAH4rbuztELRicoe-IcasYSR7AWgu'
-RECAPTCHA_PRIVATE_KEY = '6LdLet0nAAAAAKHlHgTbta9V8ekEZQucGw_1e3TO'
+# reCAPTCHA settings
+RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY
+RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE_KEY

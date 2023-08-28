@@ -158,41 +158,7 @@ def pjkt2_dark(request):
 
 User = get_user_model()
 
-# other imports and code...
 
-# def signup(request):
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('login')
-#     else:
-#         form = SignUpForm()
-#     return render(request, 'signup.html', {'form': form})
-
-# def login(request):
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username_or_email = form.cleaned_data.get('login')
-#             password = form.cleaned_data.get('password')
-
-#             user = authenticate(request, username=username_or_email, password=password)
-#             if user is None:
-#                 try:
-#                     user = User.objects.get(email=username_or_email)
-#                     user = authenticate(request, username=user.username, password=password)
-#                 except User.DoesNotExist:
-#                     pass
-
-#             if user is not None:
-#                 auth_login(request, user)
-#                 return redirect('pjkt1')
-#             else:
-#                 form.add_error(None, "Invalid username/email or password")
-#     else:
-#         form = LoginForm()
-#     return render(request, 'login.html', {'form': form})
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
